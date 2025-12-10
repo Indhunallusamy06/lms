@@ -1,0 +1,32 @@
+
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Course</title>
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+  <a href="index.html">&larr; Back</a>
+  <main class="container">
+    <h2 id="title">Course Title</h2>
+    <p id="desc">Course description here.</p>
+    <h3>Lessons</h3>
+    <ul id="lessons"></ul>
+  </main>
+  <script>
+    // example: open course data from local JSON when used with static hosting
+    (async ()=>{
+      const q = new URLSearchParams(location.search);
+      const id = q.get('id') || 'course-1';
+      const resp = await fetch('data/courses.json');
+      const data = await resp.json();
+      const course = data.find(c=>c.id===id) || data[0];
+      document.getElementById('title').textContent = course.title;
+      document.getElementById('desc').textContent = course.description;
+      const lessons = document.getElementById('lessons');
+      course.lessons.forEach((l,i)=>{
+        const li = document.createElement('li');
+        li.textContent = (i+1)+'. '+l;
+        lessons.appendChild(li);
+      })
+    })();
+  </script>
+</body></html>

@@ -1,0 +1,24 @@
+
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - LMS</title>
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+  <header><h1>Admin Panel (Prototype)</h1></header>
+  <main class="container">
+    <p>This is a static mockup. In a real project this would connect to APIs to create/edit courses and users.</p>
+    <button onclick="alert('Hook this to an API')">Create Course</button>
+    <h3>Sample courses</h3>
+    <ul id="list"></ul>
+  </main>
+  <script>
+    fetch('data/courses.json').then(r=>r.json()).then(data=>{
+      const ul = document.getElementById('list');
+      data.forEach(c=>{
+        const li = document.createElement('li');
+        li.textContent = c.title + ' — ' + c.id;
+        ul.appendChild(li);
+      })
+    });
+  </script>
+</body></html>
